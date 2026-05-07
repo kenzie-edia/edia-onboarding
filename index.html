@@ -129,41 +129,99 @@
 
   .progress {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 32px;
+    align-items: flex-start;
+    gap: 0;
+    margin-top: 36px;
     font-size: 11px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--wg-500);
-    font-weight: 500;
+    font-weight: 600;
   }
   .progress-step {
+    flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    position: relative;
+    padding: 0 4px;
+    min-width: 0;
+  }
+  .progress-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 11px;
+    left: calc(50% + 16px);
+    right: calc(-50% + 16px);
+    height: 2px;
+    background: var(--wg-300);
+    z-index: 0;
+  }
+  .progress-step.completed:not(:last-child)::after {
+    background: var(--wg-900);
   }
   .step-dot {
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: var(--wg-200);
-    color: var(--wg-700);
+    background: var(--wg-300);
+    color: var(--wg-600);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+  }
+  .progress-step.completed .step-dot {
+    background: var(--wg-900);
+    color: var(--wg-0);
   }
   .progress-step.active .step-dot {
-    background: var(--y-400);
+    background: var(--wg-0);
     color: var(--wg-900);
+    border: 3px solid var(--y-400);
+    box-shadow: 0 0 0 3px rgba(248, 213, 32, 0.2);
+    font-size: 0;
   }
-  .progress-step.active span.label { color: var(--wg-900); }
-  .progress-line {
-    flex: 0 0 32px;
-    height: 1px;
-    background: var(--wg-300);
+  .step-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    line-height: 1.25;
+    gap: 3px;
+  }
+  .step-text .label {
+    font-size: 10.5px;
+    color: var(--wg-600);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .progress-step.active .step-text .label { color: var(--wg-900); }
+  .progress-step.completed .step-text .label { color: var(--wg-700); }
+  .step-text .sublabel {
+    font-size: 9.5px;
+    color: var(--wg-500);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+  .you-are-here {
+    position: absolute;
+    top: -22px;
+    background: var(--y-400);
+    color: var(--y-900);
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
   }
 
   /* ---------- Form container ---------- */
@@ -555,7 +613,11 @@
     .topbar, .hero, .form-wrap, .form-footer, .page-footer { padding-left: 24px; padding-right: 24px; }
     .row, .check-grid { grid-template-columns: 1fr; }
     .hero h1 { font-size: 26px; }
-    .progress-line { flex: 0 0 16px; }
+    .progress { gap: 0; }
+    .progress-step { padding: 0 2px; }
+    .step-text .label { font-size: 9.5px; }
+    .step-text .sublabel { font-size: 8.5px; }
+    .you-are-here { font-size: 7.5px; padding: 2px 6px; top: -20px; }
   }
 </style>
 </head>
@@ -565,7 +627,7 @@
 <header class="topbar">
   <div class="wordmark">edia</div>
   <div class="topbar-labels">
-    DISTRICT ONBOARDING<span>SECURE FORM
+    DISTRICT ONBOARDING<span>·</span>STEP 2 OF 5<span>·</span>SECURE FORM
   </div>
 </header>
 <div class="accent-line"></div>
@@ -574,8 +636,49 @@
 <section class="hero">
   <div class="hero-inner">
     <span class="pill">District Onboarding</span>
-    <h1>Let's get your district set up!</h1>
-    <p class="lede">A few quick questions to align on outcomes, connect your systems, and plan your team's training. This should take about 5 minutes. Your progress saves automatically.</p>
+    <h1>Let's get your district set up for the year ahead.</h1>
+    <p class="lede">A few quick questions to align on outcomes, connect your systems, and plan your team's training. This should take about 8&ndash;12 minutes. Your progress saves automatically.</p>
+
+    <div class="progress">
+      <div class="progress-step completed">
+        <span class="step-dot">✓</span>
+        <div class="step-text">
+          <span class="label">Welcome &amp; Contract</span>
+          <span class="sublabel">Complete</span>
+        </div>
+      </div>
+      <div class="progress-step active">
+        <span class="you-are-here">You are here</span>
+        <span class="step-dot">2</span>
+        <div class="step-text">
+          <span class="label">Share Your Goals</span>
+          <span class="sublabel">~5 min</span>
+        </div>
+      </div>
+      <div class="progress-step">
+        <span class="step-dot">3</span>
+        <div class="step-text">
+          <span class="label">Setup &amp; Configuration</span>
+          <span class="sublabel">Together</span>
+        </div>
+      </div>
+      <div class="progress-step">
+        <span class="step-dot">4</span>
+        <div class="step-text">
+          <span class="label">Enablement</span>
+          <span class="sublabel">Together</span>
+        </div>
+      </div>
+      <div class="progress-step">
+        <span class="step-dot">5</span>
+        <div class="step-text">
+          <span class="label">Live &amp; Growing</span>
+          <span class="sublabel">You're set!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ===== Form ===== -->
 <form id="onboarding-form" novalidate>
@@ -788,7 +891,7 @@
   <div class="success-card">
     <div class="check-circle"></div>
     <h2>Thanks — we've got it.</h2>
-    <p>Your onboarding details are in. Your Edia CSM will reach out within 2 business days to confirm next steps. Keep an eye on your inbox and don't hesitate to reach out if you have questions in the meantime!</p>
+    <p>Your onboarding details are in. Your Edia success lead will reach out within 2 business days to confirm next steps and schedule your kickoff. Keep an eye on your inbox.</p>
   </div>
 </div>
 
@@ -796,7 +899,7 @@
 <div class="page-footer-accent"></div>
 <footer class="page-footer">
   <span class="cta">Questions? Your success lead is one email away.</span>
-  <span class="contact">kenzie@edia.com &nbsp;&middot;&nbsp; edia.com</span>
+  <span class="contact">success@edia.com &nbsp;&middot;&nbsp; edia.com</span>
 </footer>
 
 <!-- ===== Toast ===== -->
