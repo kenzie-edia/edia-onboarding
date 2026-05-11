@@ -637,7 +637,7 @@
   <div class="hero-inner">
     <span class="pill">District Onboarding</span>
     <h1>Let's get your district set up for the year ahead.</h1>
-    <p class="lede">A few quick questions to align on outcomes, connect your systems, and plan your team's training. This should take about 5 minutes. Your progress saves automatically.</p>
+    <p class="lede">A few quick questions to align on outcomes, connect your systems, and plan your team's training. This should take about 8&ndash;12 minutes. Your progress saves automatically.</p>
 
     <div class="progress">
       <div class="progress-step completed">
@@ -774,10 +774,10 @@
       </div>
 
       <div class="field">
-        <label for="ein">EIN (Employer Identification Number) <span style="color:#B42318">*</span></label>
-        <input type="text" id="ein" name="ein" placeholder="XX-XXXXXXX" required pattern="^\d{2}-?\d{7}$">
-        <p class="helper">Your district's 9-digit federal tax ID. Required to register your district as a verified sender with mobile carriers so we can deliver text messages to families.</p>
-        <p class="field-error">Please enter a valid 9-digit EIN (format: XX-XXXXXXX).</p>
+        <label for="ein">EIN (Employer Identification Number)</label>
+        <input type="text" id="ein" name="ein" placeholder="XX-XXXXXXX" pattern="^\d{2}-?\d{7}$">
+        <p class="helper">Your district's 9-digit federal tax ID. Needed to register your district as a verified sender with mobile carriers so we can deliver text messages to families. If you don't have it handy, feel free to skip — we'll follow up.</p>
+        <p class="field-error">Please enter a valid 9-digit EIN (format: XX-XXXXXXX), or leave it blank.</p>
       </div>
 
       <div class="field" style="margin-bottom:0;">
@@ -1089,9 +1089,18 @@
     let firstInvalid = null;
     form.querySelectorAll(".field").forEach((f) => f.classList.remove("has-error"));
 
-    form.querySelectorAll("[required]").forEach((input) => {
-      const valid = input.checkValidity() && input.value.trim() !== "";
-      if (!valid) {
+    form.querySelectorAll("[required], [pattern]").forEach((input) => {
+      const value = input.value.trim();
+      const isRequired = input.hasAttribute("required");
+      let invalid = false;
+
+      if (isRequired && value === "") {
+        invalid = true; // required field is empty
+      } else if (value !== "" && !input.checkValidity()) {
+        invalid = true; // non-empty field fails pattern/format check
+      }
+
+      if (invalid) {
         const field = input.closest(".field");
         if (field) field.classList.add("has-error");
         if (!firstInvalid) firstInvalid = input;
