@@ -632,6 +632,12 @@
 </header>
 <div class="accent-line"></div>
 
+<!-- ===== Debug banner (only shows when ?_debug is in URL) ===== -->
+<div id="debug-banner" style="display:none; position:fixed; top:20px; right:20px; background:var(--wg-0); border:1px solid var(--wg-300); border-top:3px solid var(--y-400); border-radius:8px; padding:14px 18px; font-size:12px; max-width:320px; box-shadow:0 8px 24px rgba(0,0,0,0.12); z-index:50;">
+  <div style="font-weight:700; color:var(--wg-900); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">URL parameters received</div>
+  <div id="debug-params" style="color:var(--wg-700); line-height:1.6; word-break:break-all; font-family:Menlo, Monaco, monospace; font-size:11.5px;"></div>
+</div>
+
 <!-- ===== Hero ===== -->
 <section class="hero">
   <div class="hero-inner">
@@ -1167,6 +1173,38 @@
       submitBtn.textContent = originalLabel;
     }
   });
+
+  // ----- Debug banner: show URL params when ?_debug is present -----
+  (function showDebugBanner() {
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has("_debug")) return;
+
+    const banner = document.getElementById("debug-banner");
+    const list = document.getElementById("debug-params");
+    if (!banner || !list) return;
+
+    list.innerHTML = "";
+    let count = 0;
+    params.forEach((value, key) => {
+      if (key === "_debug") return;
+      count++;
+      const row = document.createElement("div");
+      const k = document.createElement("strong");
+      k.textContent = key;
+      row.appendChild(k);
+      row.appendChild(document.createTextNode(": " + (value || "(empty)")));
+      list.appendChild(row);
+    });
+
+    if (count === 0) {
+      const empty = document.createElement("em");
+      empty.style.color = "var(--wg-500)";
+      empty.textContent = "No parameters besides _debug";
+      list.appendChild(empty);
+    }
+
+    banner.style.display = "block";
+  })();
 
   // ----- Init -----
   restoreForm();
