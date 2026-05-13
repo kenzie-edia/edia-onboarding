@@ -1,0 +1,1291 @@
+<!--
+  ============================================================
+  EDIA · DISTRICT ONBOARDING FORM (LIVE VERSION)
+  ============================================================
+
+  HOW TO MAKE THIS FORM LIVE (one-time setup, ~5 min):
+
+  1. Go to https://formspree.io and create a free account.
+  2. Create a new form. Formspree will give you a URL that looks like:
+        https://formspree.io/f/abcd1234
+  3. In this file, find the line marked "REPLACE THIS" below and
+     paste your URL in place of the placeholder.
+  4. In Formspree's dashboard, add every email address that should
+     receive submissions under "Notifications".
+  5. Save the file and host it on edia.app (or paste its contents
+     into your site's CMS / page builder).
+
+  That's it. Submissions will email everyone you listed, and the
+  data will also be visible in your Formspree dashboard.
+
+  Later: when you're ready to also send submissions into Salesforce,
+  Formspree has a built-in Salesforce/Zapier integration — no
+  changes to this file required.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edia · District Onboarding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wg-0:   #FFFFFF;
+    --wg-100: #FBF9F3;
+    --wg-200: #EEEBE3;
+    --wg-300: #DAD7CC;
+    --wg-400: #BAB6AA;
+    --wg-500: #969188;
+    --wg-600: #787368;
+    --wg-700: #4E4B42;
+    --wg-800: #383530;
+    --wg-900: #22201C;
+    --y-200:  #FEED78;
+    --y-400:  #F8D520;
+    --y-900:  #6E3D06;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--wg-100);
+    color: var(--wg-800);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    background: var(--wg-900);
+    color: var(--wg-0);
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .wordmark {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .topbar-labels {
+    color: var(--wg-300);
+    text-transform: uppercase;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+  }
+  .topbar-labels span { color: var(--wg-500); margin: 0 8px; }
+
+  .accent-line {
+    height: 3px;
+    background: var(--y-400);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: var(--wg-100);
+    padding: 56px 48px 48px;
+    border-bottom: 1px solid var(--wg-300);
+  }
+  .hero-inner { max-width: 880px; margin: 0 auto; }
+
+  .pill {
+    display: inline-block;
+    background: var(--y-200);
+    color: var(--y-900);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--wg-900);
+    margin-bottom: 14px;
+    max-width: 640px;
+  }
+
+  .hero p.lede {
+    font-size: 14.5px;
+    color: var(--wg-600);
+    line-height: 1.6;
+    max-width: 620px;
+  }
+
+  .progress {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-top: 36px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--wg-500);
+    font-weight: 600;
+  }
+  .progress-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    padding: 0 4px;
+    min-width: 0;
+  }
+  .progress-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 11px;
+    left: calc(50% + 16px);
+    right: calc(-50% + 16px);
+    height: 2px;
+    background: var(--wg-300);
+    z-index: 0;
+  }
+  .progress-step.completed:not(:last-child)::after {
+    background: var(--wg-900);
+  }
+  .step-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--wg-300);
+    color: var(--wg-600);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+  }
+  .progress-step.completed .step-dot {
+    background: var(--wg-900);
+    color: var(--wg-0);
+  }
+  .progress-step.active .step-dot {
+    background: var(--wg-0);
+    color: var(--wg-900);
+    border: 3px solid var(--y-400);
+    box-shadow: 0 0 0 3px rgba(248, 213, 32, 0.2);
+    font-size: 0;
+  }
+  .step-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    line-height: 1.25;
+    gap: 3px;
+  }
+  .step-text .label {
+    font-size: 10.5px;
+    color: var(--wg-600);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .progress-step.active .step-text .label { color: var(--wg-900); }
+  .progress-step.completed .step-text .label { color: var(--wg-700); }
+  .step-text .sublabel {
+    font-size: 9.5px;
+    color: var(--wg-500);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+  .you-are-here {
+    position: absolute;
+    top: -22px;
+    background: var(--y-400);
+    color: var(--y-900);
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  /* ---------- Form container ---------- */
+  .form-wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 48px 24px;
+  }
+
+  /* ---------- Section ---------- */
+  .section {
+    background: var(--wg-0);
+    border: 1px solid var(--wg-300);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .section::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 28px;
+    bottom: 28px;
+    width: 3px;
+    background: var(--y-400);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .section-label {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--wg-500);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 8px;
+  }
+  .section-heading {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--wg-900);
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    font-size: 13.5px;
+    color: var(--wg-600);
+    margin-bottom: 28px;
+    max-width: 560px;
+    line-height: 1.55;
+  }
+
+  /* ---------- Fields ---------- */
+  .field {
+    margin-bottom: 22px;
+  }
+  .field label, .group-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--wg-800);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .field .helper {
+    font-size: 12.5px;
+    color: var(--wg-500);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .field-error {
+    font-size: 12.5px;
+    color: #B42318;
+    margin-top: 6px;
+    line-height: 1.5;
+    display: none;
+  }
+  .field.has-error input,
+  .field.has-error select,
+  .field.has-error textarea {
+    border-color: #B42318;
+  }
+  .field.has-error .field-error { display: block; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--wg-300);
+    border-radius: 8px;
+    background: var(--wg-0);
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--wg-900);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--wg-700);
+    box-shadow: 0 0 0 3px rgba(248, 213, 32, 0.25);
+  }
+  textarea { min-height: 96px; resize: vertical; line-height: 1.5; }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* ---------- Checkbox/Toggle cards ---------- */
+  .check-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .check-card {
+    border: 1px solid var(--wg-300);
+    border-radius: 8px;
+    padding: 14px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--wg-0);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .check-card:hover { border-color: var(--wg-500); background: var(--wg-100); }
+  .check-card.selected {
+    border-color: var(--y-400);
+    background: #FFFCEB;
+    box-shadow: inset 0 0 0 1px var(--y-400);
+  }
+  .check-card input { margin-top: 3px; accent-color: var(--wg-900); }
+  .check-card .ct-title {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--wg-900);
+    margin-bottom: 2px;
+  }
+  .check-card .ct-desc {
+    font-size: 12px;
+    color: var(--wg-600);
+    line-height: 1.5;
+  }
+
+  /* Simple checklist style */
+  .check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 4px;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  .check-item input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .check-item .check-box {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--wg-400);
+    border-radius: 4px;
+    background: var(--wg-0);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  .check-item:hover .check-box {
+    border-color: var(--wg-700);
+  }
+  .check-item.selected .check-box {
+    background: var(--y-400);
+    border-color: var(--y-400);
+  }
+  .check-item.selected .check-box::after {
+    content: "";
+    width: 5px;
+    height: 9px;
+    border: solid var(--wg-900);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) translate(-1px, -1px);
+  }
+  .check-item .check-text {
+    font-size: 14px;
+    color: var(--wg-800);
+    line-height: 1.4;
+  }
+  .check-item.selected .check-text {
+    color: var(--wg-900);
+    font-weight: 500;
+  }
+  .check-item.other-row { flex-wrap: wrap; }
+  .check-item input.other-input {
+    display: none;
+    width: calc(100% - 30px) !important;
+    margin-top: 8px;
+    margin-left: 30px;
+    padding: 9px 12px;
+    font-size: 13.5px;
+    border: 1px solid var(--wg-300);
+    border-radius: 6px;
+    background: var(--wg-0);
+    font-family: inherit;
+    color: var(--wg-900);
+    box-sizing: border-box;
+  }
+  .check-item.other-row input[type="checkbox"]:checked ~ input.other-input,
+  .check-item.other-row.selected input.other-input {
+    display: block;
+  }
+  .check-item input.other-input:focus {
+    outline: none;
+    border-color: var(--wg-700);
+    box-shadow: 0 0 0 3px rgba(248, 213, 32, 0.25);
+  }
+
+  /* ---------- Radio rows ---------- */
+  .radio-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .radio-pill {
+    border: 1px solid var(--wg-300);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: var(--wg-700);
+    cursor: pointer;
+    background: var(--wg-0);
+    transition: all 0.15s;
+  }
+  .radio-pill:hover { border-color: var(--wg-500); color: var(--wg-900); }
+  .radio-pill.selected {
+    background: var(--wg-900);
+    color: var(--wg-0);
+    border-color: var(--wg-900);
+  }
+
+  /* ---------- Footer / submit ---------- */
+  .form-footer {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 8px 48px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .save-note {
+    font-size: 12.5px;
+    color: var(--wg-500);
+  }
+  .btn-row { display: flex; gap: 12px; }
+  .btn {
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--wg-800);
+    border-color: var(--wg-300);
+  }
+  .btn-secondary:hover { background: var(--wg-100); border-color: var(--wg-500); }
+  .btn-primary {
+    background: var(--wg-900);
+    color: var(--y-400);
+    border-color: var(--wg-900);
+  }
+  .btn-primary:hover { background: #000; }
+  .btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+
+  /* ---------- Page footer ---------- */
+  .page-footer-accent { height: 2px; background: var(--y-400); }
+  .page-footer {
+    background: var(--wg-900);
+    color: var(--wg-0);
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12.5px;
+  }
+  .page-footer .cta { color: var(--y-400); font-weight: 500; }
+  .page-footer .contact { color: var(--wg-300); }
+
+  /* ---------- Misc ---------- */
+  .tier-note {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: var(--wg-100);
+    border-left: 2px solid var(--y-400);
+    font-size: 12.5px;
+    color: var(--wg-700);
+    line-height: 1.55;
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ---------- Toast ---------- */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--wg-900);
+    color: var(--wg-0);
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 100;
+  }
+  .toast.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---------- Success state ---------- */
+  .success-card {
+    max-width: 880px;
+    margin: 48px auto;
+    padding: 56px 48px;
+    background: var(--wg-0);
+    border: 1px solid var(--wg-300);
+    border-radius: 12px;
+    text-align: center;
+  }
+  .success-card .check-circle {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: var(--y-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .success-card .check-circle::after {
+    content: "";
+    width: 16px;
+    height: 28px;
+    border: solid var(--wg-900);
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg) translate(-2px, -3px);
+  }
+  .success-card h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--wg-900);
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .success-card p {
+    font-size: 14.5px;
+    color: var(--wg-600);
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 720px) {
+    .topbar, .hero, .form-wrap, .form-footer, .page-footer { padding-left: 24px; padding-right: 24px; }
+    .row, .check-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 26px; }
+    .progress { gap: 0; }
+    .progress-step { padding: 0 2px; }
+    .step-text .label { font-size: 9.5px; }
+    .step-text .sublabel { font-size: 8.5px; }
+    .you-are-here { font-size: 7.5px; padding: 2px 6px; top: -20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Top bar ===== -->
+<header class="topbar">
+  <div class="wordmark">edia</div>
+  <div class="topbar-labels">
+    DISTRICT ONBOARDING<span>·</span>STEP 2 OF 5<span>·</span>SECURE FORM
+  </div>
+</header>
+<div class="accent-line"></div>
+
+<!-- ===== Debug banner (only shows when ?_debug is in URL) ===== -->
+<div id="debug-banner" style="display:none; position:fixed; top:20px; right:20px; background:var(--wg-0); border:1px solid var(--wg-300); border-top:3px solid var(--y-400); border-radius:8px; padding:14px 18px; font-size:12px; max-width:320px; box-shadow:0 8px 24px rgba(0,0,0,0.12); z-index:50;">
+  <div style="font-weight:700; color:var(--wg-900); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">URL parameters received</div>
+  <div id="debug-params" style="color:var(--wg-700); line-height:1.6; word-break:break-all; font-family:Menlo, Monaco, monospace; font-size:11.5px;"></div>
+</div>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="pill">District Onboarding</span>
+    <h1>Let's get your district set up for the year ahead.</h1>
+    <p class="lede">A few quick questions to align on outcomes, connect your systems, and plan your team's training. This should take about 8&ndash;12 minutes. Your progress saves automatically.</p>
+
+    <div class="progress">
+      <div class="progress-step completed">
+        <span class="step-dot">✓</span>
+        <div class="step-text">
+          <span class="label">Welcome &amp; Contract</span>
+          <span class="sublabel">Complete</span>
+        </div>
+      </div>
+      <div class="progress-step active">
+        <span class="you-are-here">You are here</span>
+        <span class="step-dot">2</span>
+        <div class="step-text">
+          <span class="label">Share Your Goals</span>
+          <span class="sublabel">~5 min</span>
+        </div>
+      </div>
+      <div class="progress-step">
+        <span class="step-dot">3</span>
+        <div class="step-text">
+          <span class="label">Setup &amp; Configuration</span>
+          <span class="sublabel">Together</span>
+        </div>
+      </div>
+      <div class="progress-step">
+        <span class="step-dot">4</span>
+        <div class="step-text">
+          <span class="label">Enablement</span>
+          <span class="sublabel">Together</span>
+        </div>
+      </div>
+      <div class="progress-step">
+        <span class="step-dot">5</span>
+        <div class="step-text">
+          <span class="label">Live &amp; Growing</span>
+          <span class="sublabel">You're set!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Form ===== -->
+<form id="onboarding-form" novalidate>
+
+  <!-- Honeypot field for spam protection (hidden from real users) -->
+  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+  <input type="hidden" name="_subject" value="New district onboarding submission">
+
+  <main class="form-wrap" id="form-content">
+
+    <!-- ===== SECTION 1: About you ===== -->
+    <section class="section">
+      <div class="section-label">Section 01</div>
+      <h2 class="section-heading">About you</h2>
+      <p class="section-sub">Just so we know who to circle back with as we work through onboarding.</p>
+
+      <div class="field" style="margin-bottom:0;">
+        <label>Your name and email <span style="color:#B42318">*</span></label>
+        <div class="row">
+          <input type="text" id="submitter-name" name="submitter_name" placeholder="Full name" required>
+          <input type="email" id="submitter-email" name="submitter_email" placeholder="email@district.org" required>
+        </div>
+        <p class="field-error">Please provide both your name and a valid email.</p>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 1: Goals & Outcomes ===== -->
+    <section class="section">
+      <div class="section-label">Section 02</div>
+      <h2 class="section-heading">Goals &amp; outcomes</h2>
+      <p class="section-sub">Tell us what success looks like for your district this year. We'll use this to shape your quarterly reporting and keep our team aligned with yours.</p>
+
+      <div class="field">
+        <span class="group-label">Primary outcome focus</span>
+        <p class="helper" style="margin-top:-2px;margin-bottom:12px;">Select all that apply.</p>
+        <div class="check-list">
+          <label class="check-item selected">
+            <input type="checkbox" name="primary_outcomes" value="Chronic Absenteeism Reduction" checked>
+            <span class="check-box"></span>
+            <span class="check-text">Chronic Absenteeism Reduction</span>
+          </label>
+          <label class="check-item selected">
+            <input type="checkbox" name="primary_outcomes" value="Improved Family Engagement and Two-Way Communication" checked>
+            <span class="check-box"></span>
+            <span class="check-text">Improved Family Engagement and Two-Way Communication</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="primary_outcomes" value="Proactive Identification of At-Risk Students">
+            <span class="check-box"></span>
+            <span class="check-text">Proactive Identification of At-Risk Students</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="primary_outcomes" value="Understand the Why Behind Absences">
+            <span class="check-box"></span>
+            <span class="check-text">Understand the Why Behind Absences</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="primary_outcomes" value="Ease Administrative Burden / Save Staff Time">
+            <span class="check-box"></span>
+            <span class="check-text">Ease Administrative Burden / Save Staff Time</span>
+          </label>
+          <label class="check-item" id="other-checkbox">
+            <input type="checkbox" name="primary_outcomes" value="Other" id="other-cb">
+            <span class="check-box"></span>
+            <span class="check-text">Other</span>
+          </label>
+          <input type="text" name="primary_outcomes_other" id="other-text" placeholder="Tell us more&hellip;" style="display:none; width: calc(100% - 30px); margin: 8px 0 0 30px; padding: 10px 14px; font-size: 14px; border: 1px solid var(--wg-300); border-radius: 8px; background: var(--wg-0); font-family: inherit; color: var(--wg-900); box-sizing: border-box;">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="baseline">Current chronic absenteeism rate</label>
+          <input type="text" id="baseline" name="current_absenteeism_rate" placeholder="e.g. 24.6%" value="22.1%">
+          <p class="helper">From your most recent state reporting cycle.</p>
+        </div>
+        <div class="field">
+          <label for="target">Target by end of school year</label>
+          <input type="text" id="target" name="target_absenteeism_rate" placeholder="e.g. 18%">
+          <p class="helper">A specific percentage or range is fine.</p>
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom:0;">
+        <label for="success">What does a successful first year with Edia look like?</label>
+        <textarea id="success" name="success_definition" placeholder="In a sentence or two&hellip;"></textarea>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 2: Integrations ===== -->
+    <section class="section">
+      <div class="section-label">Section 03</div>
+      <h2 class="section-heading">Integrations</h2>
+      <p class="section-sub">Connect the systems that hold your student, attendance, and communication data. We support nightly syncs and real-time webhooks for most providers.</p>
+
+      <div class="field">
+        <label for="sis">Student Information System (SIS) <span style="color:#B42318">*</span></label>
+        <select id="sis" name="sis" required>
+          <option>PowerSchool</option>
+          <option>Infinite Campus</option>
+          <option>Skyward</option>
+          <option>Aeries</option>
+          <option>Synergy / Edupoint</option>
+          <option value="other">Other / Not listed</option>
+        </select>
+        <input type="text" id="sis-other" name="sis_other" placeholder="Which SIS does your district use?" style="display:none; margin-top: 8px; width: 100%; padding: 11px 14px; font-size: 14px; border: 1px solid var(--wg-300); border-radius: 8px; background: var(--wg-0); font-family: inherit; color: var(--wg-900); box-sizing: border-box;">
+        <p class="helper">Your SIS is the source of truth for enrollment and attendance.</p>
+        <p class="field-error">Please select your SIS.</p>
+      </div>
+
+      <div class="field">
+        <label for="ein">EIN (Employer Identification Number)</label>
+        <input type="text" id="ein" name="ein" placeholder="XX-XXXXXXX" pattern="^\d{2}-?\d{7}$">
+        <p class="helper">Your district's 9-digit federal tax ID. Needed to register your district as a verified sender with mobile carriers so we can deliver text messages to families. If you don't have it handy, feel free to skip — we'll follow up.</p>
+        <p class="field-error">Please enter a valid 9-digit EIN (format: XX-XXXXXXX), or leave it blank.</p>
+      </div>
+
+      <div class="field" style="margin-bottom:0;">
+        <label>Primary IT / data contact <span style="color:#B42318">*</span></label>
+        <div class="row">
+          <input type="text" id="it-contact" name="it_contact_name" placeholder="Full name" required>
+          <input type="email" name="it_contact_email" placeholder="email@district.org" required>
+        </div>
+        <p class="helper">We'll need to work with your SIS administrator to get the integration fully set up. We'll keep you copied on all communications throughout the process.</p>
+        <p class="field-error">Please provide both a name and a valid email.</p>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 3: PD (DYNAMIC MOCKUP) ===== -->
+    <section class="section">
+      <div class="section-label">Section 04</div>
+      <h2 class="section-heading">Professional development</h2>
+
+      <!-- Top selector that drives everything else in this section (hidden when SFDC-driven) -->
+      <div class="field" id="pd-package-field">
+        <label for="pd-package">Did you purchase live PD?</label>
+        <select id="pd-package" name="pd_package">
+          <option value="">— Select —</option>
+          <option value="pd">Yes — we purchased PD</option>
+          <option value="self-serve">No — self-serve only</option>
+        </select>
+        <p class="helper">Not sure? Your contract or your Edia rep can confirm. The rest of this section will adjust based on your answer.</p>
+      </div>
+
+      <!-- Captures the raw SFDC value so submissions can confirm what was pulled -->
+      <input type="hidden" id="pd-sfdc-source" name="pd_sfdc_value" value="">
+
+      <!-- Block: Self-serve only -->
+      <div class="pd-block" data-package="self-serve" hidden>
+        <div class="tier-note" style="margin-bottom:22px;">
+          <strong>Your team will have access to our self-serve PD library.</strong> Courses are available on-demand — your team can complete them on their own schedule. We'll send login details right after kickoff.
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="users-ss">Estimated number of users who'll use the library</label>
+            <input type="number" name="estimated_users" placeholder="e.g. 45">
+            <p class="helper">Counselors, attendance staff, principals, district leadership.</p>
+          </div>
+          <div class="field">
+            <label for="interest-live">Interest in adding live sessions later?</label>
+            <select name="self_serve_interest">
+              <option value="">— Select —</option>
+              <option>Yes, please send pricing</option>
+              <option>Maybe — let's revisit in a few months</option>
+              <option>No, self-serve is enough for now</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Block: Unified PD (shown when any live PD purchased) -->
+      <div class="pd-block" data-package="pd" hidden>
+        <div class="tier-note" style="margin-bottom:22px;">
+          The below details help our Professional Learning Managers tailor PD sessions to your district. If you have questions, just reply to your onboarding email.
+        </div>
+
+        <div class="field">
+          <label>PD coordinator <span style="color:#B42318">*</span></label>
+          <p class="helper" style="margin-top:-4px; margin-bottom:10px;">Likely a different person from whoever's filling out this form — this is who we'll coordinate scheduling with.</p>
+          <div class="row">
+            <input type="text" name="pd_coord_name" placeholder="Full name" required>
+            <input type="email" name="pd_coord_email" placeholder="email@district.org" required>
+          </div>
+          <p class="field-error">Please provide both a name and a valid email.</p>
+        </div>
+
+        <div class="field">
+          <label for="pd-preferred-times">Do you have preferred dates or times for PD sessions?</label>
+          <textarea id="pd-preferred-times" name="pd_preferred_times" placeholder="e.g., afternoons after 3pm, weeks of Aug 12 and 19, no Fridays…"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="pd-staff-count">How many staff members will be participating in PD?</label>
+          <input type="number" id="pd-staff-count" name="pd_staff_count" placeholder="e.g., 25" min="0">
+        </div>
+
+        <div class="field" style="margin-bottom:0;">
+          <label for="pd-notes">Notes</label>
+          <textarea id="pd-notes" name="pd_notes" placeholder="Anything else we should know — sensitivities, scheduling constraints, specific cohorts…"></textarea>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ===== Form footer ===== -->
+  <div class="form-footer">
+    <span class="save-note" id="save-note">Not saved yet</span>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="save-later-btn">Save &amp; finish later</button>
+      <button type="submit" class="btn btn-primary" id="submit-btn">Submit onboarding info &rarr;</button>
+    </div>
+  </div>
+</form>
+
+<!-- ===== Success state (hidden until submission succeeds) ===== -->
+<div id="success-state" style="display:none;">
+  <div class="success-card">
+    <div class="check-circle"></div>
+    <h2>Thanks — we've got it.</h2>
+    <p>Your onboarding details are in. Your Edia success lead will reach out within 2 business days to confirm next steps and schedule your kickoff. Keep an eye on your inbox.</p>
+  </div>
+</div>
+
+<!-- ===== Page footer ===== -->
+<div class="page-footer-accent"></div>
+<footer class="page-footer">
+  <span class="cta">Questions? Your success lead is one email away.</span>
+  <span class="contact">success@edia.com &nbsp;&middot;&nbsp; edia.com</span>
+</footer>
+
+<!-- ===== Toast ===== -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ============================================================
+  // CONFIGURATION
+  // ============================================================
+  // REPLACE THIS with the URL Formspree gives you (looks like
+  // "https://formspree.io/f/abcd1234"). Until you replace it,
+  // the form will show a friendly message instead of submitting.
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xaqvboav";
+  // ============================================================
+
+  const STORAGE_KEY = "edia-onboarding-form-v1";
+  const form = document.getElementById("onboarding-form");
+  const saveNote = document.getElementById("save-note");
+  const submitBtn = document.getElementById("submit-btn");
+  const saveLaterBtn = document.getElementById("save-later-btn");
+  const toast = document.getElementById("toast");
+  let lastSavedAt = null;
+
+  // ----- Selected-class sync for checkbox cards/items -----
+  function syncCheckState(cb) {
+    const card = cb.closest(".check-card, .check-item");
+    if (card) card.classList.toggle("selected", cb.checked);
+  }
+  document
+    .querySelectorAll('.check-card input[type="checkbox"], .check-item input[type="checkbox"]')
+    .forEach((cb) => {
+      cb.addEventListener("change", () => syncCheckState(cb));
+      syncCheckState(cb);
+    });
+
+  // ----- Radio pill selection (kept from original) -----
+  document.querySelectorAll(".radio-row").forEach((row) => {
+    row.querySelectorAll(".radio-pill").forEach((pill) => {
+      pill.addEventListener("click", () => {
+        row.querySelectorAll(".radio-pill").forEach((p) => p.classList.remove("selected"));
+        pill.classList.add("selected");
+      });
+    });
+  });
+
+  // ----- "Other" reveal/hide -----
+  function wireOtherToggle(checkboxId, textId) {
+    const cb = document.getElementById(checkboxId);
+    const txt = document.getElementById(textId);
+    if (!cb || !txt) return;
+    const update = () => {
+      txt.style.display = cb.checked ? "block" : "none";
+    };
+    cb.addEventListener("change", update);
+    update();
+  }
+  wireOtherToggle("other-cb", "other-text");
+  wireOtherToggle("audience-other-cb", "audience-other-text");
+
+  const sisSelect = document.getElementById("sis");
+  const sisOther = document.getElementById("sis-other");
+  if (sisSelect && sisOther) {
+    const updateSis = () => {
+      sisOther.style.display = sisSelect.value === "other" ? "block" : "none";
+    };
+    sisSelect.addEventListener("change", updateSis);
+    updateSis();
+  }
+
+  // ----- Autosave to localStorage -----
+  function snapshotForm() {
+    const data = {};
+    const fd = new FormData(form);
+    for (const [key, value] of fd.entries()) {
+      if (data[key] === undefined) {
+        data[key] = value;
+      } else if (Array.isArray(data[key])) {
+        data[key].push(value);
+      } else {
+        data[key] = [data[key], value];
+      }
+    }
+    return data;
+  }
+
+  function restoreForm() {
+    let saved;
+    try {
+      saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+    } catch (e) {
+      return;
+    }
+    if (!saved || !saved.fields) return;
+
+    Object.entries(saved.fields).forEach(([name, value]) => {
+      const inputs = form.querySelectorAll('[name="' + name + '"]');
+      if (inputs.length === 0) return;
+      const values = Array.isArray(value) ? value : [value];
+
+      if (inputs[0].type === "checkbox") {
+        inputs.forEach((input) => {
+          input.checked = values.includes(input.value);
+          syncCheckState(input);
+        });
+      } else if (inputs[0].type === "radio") {
+        inputs.forEach((input) => {
+          input.checked = values.includes(input.value);
+        });
+      } else {
+        inputs[0].value = values[0];
+        if (inputs[0].id === "sis") {
+          const evt = new Event("change");
+          inputs[0].dispatchEvent(evt);
+        }
+      }
+    });
+
+    // Re-trigger "Other" reveals after restore
+    ["other-cb", "audience-other-cb"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.dispatchEvent(new Event("change"));
+    });
+
+    lastSavedAt = saved.savedAt || Date.now();
+    updateSaveNote();
+  }
+
+  function saveForm() {
+    const payload = {
+      fields: snapshotForm(),
+      savedAt: Date.now(),
+    };
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      lastSavedAt = payload.savedAt;
+      updateSaveNote();
+    } catch (e) {
+      // localStorage full or unavailable — fail silently
+    }
+  }
+
+  function updateSaveNote() {
+    if (!lastSavedAt) {
+      saveNote.textContent = "Not saved yet";
+      return;
+    }
+    const seconds = Math.floor((Date.now() - lastSavedAt) / 1000);
+    let label;
+    if (seconds < 5) label = "Saved just now";
+    else if (seconds < 60) label = "Saved " + seconds + " sec ago";
+    else if (seconds < 3600) label = "Saved " + Math.floor(seconds / 60) + " min ago";
+    else label = "Saved " + Math.floor(seconds / 3600) + " hr ago";
+    saveNote.textContent = "Saved automatically · " + label.replace(/^Saved /, "");
+  }
+
+  // Debounced save on any change
+  let saveTimer = null;
+  form.addEventListener("input", () => {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveForm, 500);
+  });
+  form.addEventListener("change", () => {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveForm, 500);
+  });
+
+  // Refresh the relative-time label every 30s
+  setInterval(updateSaveNote, 30000);
+
+  // ----- "Save & finish later" -----
+  saveLaterBtn.addEventListener("click", () => {
+    saveForm();
+    showToast("Progress saved. Close this tab and return anytime — we'll pick up where you left off.");
+  });
+
+  // ----- Toast -----
+  let toastTimer = null;
+  function showToast(message, duration = 3500) {
+    toast.textContent = message;
+    toast.classList.add("visible");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("visible"), duration);
+  }
+
+  // ----- Validation -----
+  function validate() {
+    let firstInvalid = null;
+    form.querySelectorAll(".field").forEach((f) => f.classList.remove("has-error"));
+
+    form.querySelectorAll("[required], [pattern]").forEach((input) => {
+      const value = input.value.trim();
+      const isRequired = input.hasAttribute("required");
+      let invalid = false;
+
+      if (isRequired && value === "") {
+        invalid = true; // required field is empty
+      } else if (value !== "" && !input.checkValidity()) {
+        invalid = true; // non-empty field fails pattern/format check
+      }
+
+      if (invalid) {
+        const field = input.closest(".field");
+        if (field) field.classList.add("has-error");
+        if (!firstInvalid) firstInvalid = input;
+      }
+    });
+
+    return firstInvalid;
+  }
+
+  // ----- Submission -----
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const invalid = validate();
+    if (invalid) {
+      invalid.focus();
+      invalid.scrollIntoView({ behavior: "smooth", block: "center" });
+      showToast("Please fix the highlighted fields before submitting.");
+      return;
+    }
+
+    // If the Formspree endpoint hasn't been configured yet, surface that
+    // clearly instead of pretending to submit.
+    if (FORMSPREE_ENDPOINT.includes("YOUR_FORM_ID")) {
+      showToast(
+        "Form is not connected yet — set FORMSPREE_ENDPOINT in the page source.",
+        6000
+      );
+      return;
+    }
+
+    submitBtn.disabled = true;
+    saveLaterBtn.disabled = true;
+    const originalLabel = submitBtn.textContent;
+    submitBtn.textContent = "Submitting…";
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        // Clear saved progress and show the success state
+        localStorage.removeItem(STORAGE_KEY);
+        form.style.display = "none";
+        document.querySelector(".form-footer").style.display = "none";
+        document.getElementById("success-state").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        const data = await response.json().catch(() => ({}));
+        const message =
+          (data.errors && data.errors.map((er) => er.message).join(", ")) ||
+          "Something went wrong. Please try again, or email success@edia.com.";
+        showToast(message, 6000);
+        submitBtn.disabled = false;
+        saveLaterBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+      }
+    } catch (err) {
+      showToast("Network error. Please check your connection and try again.", 6000);
+      submitBtn.disabled = false;
+      saveLaterBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+    }
+  });
+
+  // ----- Dynamic PD section: URL ?pd=... drives blocks, or dropdown as fallback -----
+  (function setupDynamicPD() {
+    const packageSelect = document.getElementById("pd-package");
+    if (!packageSelect) return;
+    const blocks = document.querySelectorAll(".pd-block");
+    const dropdownField = document.getElementById("pd-package-field");
+    const sfdcSourceInput = document.getElementById("pd-sfdc-source");
+
+    // Resolve any SFDC value into a block name. Yes/No model:
+    // any "has PD" signal → unified PD block; any "no PD" signal → self-serve.
+    //
+    // Accepted forms (case-insensitive):
+    //   - "no", "none", "false", "0", "self-serve" → self-serve block
+    //   - anything else non-empty (yes/virtual/in-person/2/true/etc.) → pd block
+    //   - empty / missing → null (fall through to manual dropdown)
+    function resolveBlockForSFDC(rawValue) {
+      const v = (rawValue || "").trim().toLowerCase();
+      if (!v) return null;
+      const noPdValues = ["no", "none", "false", "0", "self-serve", "selfserve"];
+      if (noPdValues.includes(v)) return "self-serve";
+      return "pd";
+    }
+
+    function setBlockEnabled(block, enabled) {
+      block.hidden = !enabled;
+      block.querySelectorAll("input, select, textarea").forEach((el) => {
+        el.disabled = !enabled;
+      });
+    }
+
+    function showBlock(blockName) {
+      blocks.forEach((block) => {
+        setBlockEnabled(block, block.dataset.package === blockName);
+      });
+    }
+
+    // Initialize: all blocks hidden
+    blocks.forEach((block) => setBlockEnabled(block, false));
+
+    // Check URL for a SFDC-driven PD value
+    const urlParams = new URLSearchParams(window.location.search);
+    const pdFromUrl = (urlParams.get("pd") || "").trim().toLowerCase();
+    const mappedBlock = resolveBlockForSFDC(pdFromUrl);
+
+    // Capture the raw value (even if unmapped) so we can debug from Formspree submissions
+    if (pdFromUrl && sfdcSourceInput) {
+      sfdcSourceInput.value = pdFromUrl;
+    }
+
+    if (mappedBlock) {
+      // SFDC-driven mode: hide the dropdown and lock in the block
+      if (dropdownField) dropdownField.style.display = "none";
+      packageSelect.value = mappedBlock;
+      showBlock(mappedBlock);
+    } else {
+      // Manual mode (no URL param or unrecognized value): dropdown drives selection
+      packageSelect.addEventListener("change", () => {
+        showBlock(packageSelect.value);
+        if (typeof saveForm === "function") saveForm();
+      });
+    }
+  })();
+
+  // ----- Debug banner: show URL params when ?_debug is present -----
+  (function showDebugBanner() {
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has("_debug")) return;
+
+    const banner = document.getElementById("debug-banner");
+    const list = document.getElementById("debug-params");
+    if (!banner || !list) return;
+
+    list.innerHTML = "";
+    let count = 0;
+    params.forEach((value, key) => {
+      if (key === "_debug") return;
+      count++;
+      const row = document.createElement("div");
+      const k = document.createElement("strong");
+      k.textContent = key;
+      row.appendChild(k);
+      row.appendChild(document.createTextNode(": " + (value || "(empty)")));
+      list.appendChild(row);
+    });
+
+    if (count === 0) {
+      const empty = document.createElement("em");
+      empty.style.color = "var(--wg-500)";
+      empty.textContent = "No parameters besides _debug";
+      list.appendChild(empty);
+    }
+
+    banner.style.display = "block";
+  })();
+
+  // ----- Init -----
+  restoreForm();
+  // Save once on first interaction even if input event doesn't fire
+  form.addEventListener("focusin", function once() {
+    if (!lastSavedAt) saveForm();
+    form.removeEventListener("focusin", once);
+  });
+</script>
+
+</body>
+</html>
