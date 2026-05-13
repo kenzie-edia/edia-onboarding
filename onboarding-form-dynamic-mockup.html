@@ -805,14 +805,11 @@
 
       <!-- Top selector that drives everything else in this section (hidden when SFDC-driven) -->
       <div class="field" id="pd-package-field">
-        <label for="pd-package">What PD package did you purchase?</label>
+        <label for="pd-package">Did you purchase live PD?</label>
         <select id="pd-package" name="pd_package">
-          <option value="">— Select your package —</option>
-          <option value="self-serve">Self-serve resources only (no live PD)</option>
-          <option value="standard">Standard — 2 virtual sessions included</option>
-          <option value="plus">Plus — 2 virtual + additional virtual sessions</option>
-          <option value="in-person">On-site / in-person training</option>
-          <option value="custom">Custom / let's discuss</option>
+          <option value="">— Select —</option>
+          <option value="pd">Yes — we purchased PD</option>
+          <option value="self-serve">No — self-serve only</option>
         </select>
         <p class="helper">Not sure? Your contract or your Edia rep can confirm. The rest of this section will adjust based on your answer.</p>
       </div>
@@ -848,234 +845,77 @@
         </div>
       </div>
 
-      <!-- Block: Standard (2 virtual sessions) -->
-      <div class="pd-block" data-package="standard" hidden>
+      <!-- Block: Unified PD (shown when any live PD purchased, regardless of type) -->
+      <div class="pd-block" data-package="pd" hidden>
         <div class="tier-note" style="margin-bottom:22px;">
-          <strong>Your purchase includes 2 virtual training sessions</strong> (60–90 minutes each). We'll work with you to schedule and tailor each one to a specific audience or topic.
-        </div>
-        <div class="row">
-          <div class="field">
-            <label for="users-std">Estimated number of users</label>
-            <input type="number" name="estimated_users" placeholder="e.g. 45">
-            <p class="helper">Counselors, attendance staff, principals, district leadership.</p>
-          </div>
-          <div class="field">
-            <label for="kickoff-std">Preferred kickoff window</label>
-            <select name="kickoff_window">
-              <option>Week of Aug 5</option>
-              <option>Week of Aug 12</option>
-              <option>Week of Aug 19</option>
-              <option>Week of Aug 26</option>
-              <option>Flexible — let's find a time</option>
-            </select>
-          </div>
+          <strong>Your team will be participating in PD sessions with our Professional Learning Managers.</strong> A few quick details will help us tailor each session to your district.
         </div>
         <div class="field">
-          <span class="group-label">Audiences for the 2 sessions</span>
+          <label for="pd-staff-count">Number of staff who'll participate in PD</label>
+          <input type="number" id="pd-staff-count" name="pd_staff_count" placeholder="e.g. 25">
+          <p class="helper">Counselors, attendance staff, principals, district leadership — anyone who'll attend.</p>
+        </div>
+        <div class="field">
+          <span class="group-label">Audiences to include</span>
           <div class="check-list">
             <label class="check-item">
-              <input type="checkbox" name="audiences" value="Attendance Team">
+              <input type="checkbox" name="pd_audiences" value="Attendance Team">
               <span class="check-box"></span>
               <span class="check-text">Attendance Team</span>
             </label>
             <label class="check-item">
-              <input type="checkbox" name="audiences" value="Site Leaders & Principals">
+              <input type="checkbox" name="pd_audiences" value="Site Leaders & Principals">
               <span class="check-box"></span>
               <span class="check-text">Site Leaders &amp; Principals</span>
             </label>
             <label class="check-item">
-              <input type="checkbox" name="audiences" value="Counselors & Social Workers">
+              <input type="checkbox" name="pd_audiences" value="Counselors & Social Workers">
               <span class="check-box"></span>
               <span class="check-text">Counselors &amp; Social Workers</span>
             </label>
             <label class="check-item">
-              <input type="checkbox" name="audiences" value="District Leadership">
+              <input type="checkbox" name="pd_audiences" value="District Leadership">
               <span class="check-box"></span>
               <span class="check-text">District Leadership</span>
             </label>
           </div>
         </div>
-        <div class="row">
-          <div class="field">
-            <label for="session-1">Session 1 topic focus</label>
-            <select name="session_1_topic">
-              <option>Getting started — platform overview</option>
-              <option>Attendance workflows</option>
-              <option>Family communications</option>
-              <option>Leadership / data review</option>
-              <option>Other (we'll discuss)</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="session-2">Session 2 topic focus</label>
-            <select name="session_2_topic">
-              <option>Getting started — platform overview</option>
-              <option>Attendance workflows</option>
-              <option>Family communications</option>
-              <option>Leadership / data review</option>
-              <option>Other (we'll discuss)</option>
-            </select>
-          </div>
-        </div>
         <div class="field">
-          <label for="virtual-classes">What classes will this be used for?</label>
-          <input type="text" id="virtual-classes" name="virtual_classes" placeholder="e.g., math, ELA, social studies, special programs">
-          <p class="helper">A short list is plenty — we'll dig into specifics during the session.</p>
+          <label for="pd-classes">Topics / classes this will support</label>
+          <input type="text" id="pd-classes" name="pd_classes" placeholder="e.g., math, ELA, social studies, special programs">
+          <p class="helper">A short list is plenty — we'll dig into specifics during scheduling.</p>
         </div>
         <div class="field">
           <span class="group-label">Grade levels</span>
           <div class="check-list">
             <label class="check-item">
-              <input type="checkbox" name="virtual_grade_levels" value="Pre-K">
+              <input type="checkbox" name="pd_grade_levels" value="Pre-K">
               <span class="check-box"></span>
               <span class="check-text">Pre-K</span>
             </label>
             <label class="check-item">
-              <input type="checkbox" name="virtual_grade_levels" value="Elementary (K–5)">
+              <input type="checkbox" name="pd_grade_levels" value="Elementary (K–5)">
               <span class="check-box"></span>
               <span class="check-text">Elementary (K–5)</span>
             </label>
             <label class="check-item">
-              <input type="checkbox" name="virtual_grade_levels" value="Middle (6–8)">
+              <input type="checkbox" name="pd_grade_levels" value="Middle (6–8)">
               <span class="check-box"></span>
               <span class="check-text">Middle (6–8)</span>
             </label>
             <label class="check-item">
-              <input type="checkbox" name="virtual_grade_levels" value="High (9–12)">
+              <input type="checkbox" name="pd_grade_levels" value="High (9–12)">
               <span class="check-box"></span>
               <span class="check-text">High (9–12)</span>
             </label>
           </div>
         </div>
-      </div>
-
-      <!-- Block: Plus (2 virtual + add-on) -->
-      <div class="pd-block" data-package="plus" hidden>
-        <div class="tier-note" style="margin-bottom:22px;">
-          <strong>Your purchase includes 2 virtual sessions plus additional add-on sessions.</strong> We'll design a series tailored to your district's needs.
-        </div>
-        <div class="row">
-          <div class="field">
-            <label for="users-plus">Estimated number of users</label>
-            <input type="number" name="estimated_users" placeholder="e.g. 45">
-          </div>
-          <div class="field">
-            <label for="kickoff-plus">Preferred kickoff window</label>
-            <select name="kickoff_window">
-              <option>Week of Aug 5</option>
-              <option>Week of Aug 12</option>
-              <option>Week of Aug 19</option>
-              <option>Week of Aug 26</option>
-              <option>Flexible — let's find a time</option>
-            </select>
-          </div>
-        </div>
         <div class="field">
-          <span class="group-label">Audiences to include across the series</span>
-          <div class="check-list">
-            <label class="check-item">
-              <input type="checkbox" name="audiences" value="Attendance Team">
-              <span class="check-box"></span>
-              <span class="check-text">Attendance Team</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="audiences" value="Site Leaders & Principals">
-              <span class="check-box"></span>
-              <span class="check-text">Site Leaders &amp; Principals</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="audiences" value="Counselors & Social Workers">
-              <span class="check-box"></span>
-              <span class="check-text">Counselors &amp; Social Workers</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="audiences" value="District Leadership">
-              <span class="check-box"></span>
-              <span class="check-text">District Leadership</span>
-            </label>
-          </div>
+          <label for="pd-notes-unified">Anything else we should know?</label>
+          <textarea id="pd-notes-unified" name="pd_unified_notes" placeholder="Scheduling constraints, specific cohorts, sensitivities…"></textarea>
         </div>
-        <div class="row">
-          <div class="field">
-            <label for="addon-count">How many additional virtual sessions did you add on?</label>
-            <input type="number" name="addon_sessions_count" placeholder="e.g. 4">
-          </div>
-          <div class="field">
-            <label for="addon-cadence">Preferred cadence for the series</label>
-            <select name="addon_cadence">
-              <option>Weekly</option>
-              <option>Every 2 weeks</option>
-              <option>Monthly</option>
-              <option>Quarterly</option>
-              <option>Other / we'll discuss</option>
-            </select>
-          </div>
-        </div>
-        <div class="field">
-          <label for="addon-topics">What topics should the additional sessions cover?</label>
-          <textarea name="addon_topics" placeholder="e.g., advanced attendance workflows, monthly principal data reviews, family communication best practices…"></textarea>
-        </div>
-      </div>
-
-      <!-- Block: In-person -->
-      <div class="pd-block" data-package="in-person" hidden>
-        <div class="tier-note" style="margin-bottom:22px;">
-          <strong>Your purchase includes on-site training.</strong> Our team will travel to your district for hands-on sessions with your staff.
-        </div>
-        <div class="row">
-          <div class="field">
-            <label for="onsite-date">Preferred date range</label>
-            <input type="text" name="onsite_date_range" placeholder="e.g., week of Aug 12">
-          </div>
-          <div class="field">
-            <label for="onsite-attendees">Estimated # of attendees</label>
-            <input type="number" name="onsite_attendees" placeholder="e.g. 30">
-          </div>
-        </div>
-        <div class="field">
-          <label for="onsite-location">Training location</label>
-          <input type="text" name="onsite_location" placeholder="District office, school name, or full address">
-          <p class="helper">If you don't have a venue picked yet, we can help you choose.</p>
-        </div>
-        <div class="field">
-          <span class="group-label">Audiences attending</span>
-          <div class="check-list">
-            <label class="check-item">
-              <input type="checkbox" name="audiences" value="Attendance Team">
-              <span class="check-box"></span>
-              <span class="check-text">Attendance Team</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="audiences" value="Site Leaders & Principals">
-              <span class="check-box"></span>
-              <span class="check-text">Site Leaders &amp; Principals</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="audiences" value="Counselors & Social Workers">
-              <span class="check-box"></span>
-              <span class="check-text">Counselors &amp; Social Workers</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="audiences" value="District Leadership">
-              <span class="check-box"></span>
-              <span class="check-text">District Leadership</span>
-            </label>
-          </div>
-        </div>
-        <div class="field">
-          <label for="onsite-needs">Venue / AV requirements or notes</label>
-          <textarea name="onsite_needs" placeholder="Projector, room capacity, breakout space, parking, anything we should plan around…"></textarea>
-        </div>
-      </div>
-
-      <!-- Block: Custom -->
-      <div class="pd-block" data-package="custom" hidden>
-        <div class="tier-note" style="margin-bottom:22px;">
-          <strong>Sounds like you've got a custom PD plan.</strong> Tell us what's in your contract and we'll design the right experience together.
-        </div>
-        <div class="field">
-          <label for="custom-plan">Describe your PD plan</label>
-          <textarea name="custom_pd_plan" placeholder="What's included? Mix of formats? Specific cohorts? Anything we should know going in…" style="min-height: 140px;"></textarea>
+        <div class="tier-note" style="margin-top: 6px;">
+          <strong>Next step:</strong> Our Professional Learning Managers will follow up with scheduling details based on your specific PD package.
         </div>
       </div>
 
@@ -1397,16 +1237,21 @@
     const indicator = document.getElementById("pd-sfdc-indicator");
     const sfdcSourceInput = document.getElementById("pd-sfdc-source");
 
-    // Map raw SFDC PD field values → mockup block names.
-    // SFDC field can hold: virtual, in-person, none.
-    // Aliases included for tolerance to formatting variants.
-    const SFDC_TO_BLOCK = {
-      "virtual": "standard",
-      "in-person": "in-person",
-      "inperson": "in-person",
-      "in_person": "in-person",
-      "none": "self-serve",
-    };
+    // Resolve any SFDC value into a block name. Since the form now uses a
+    // unified "pd" block for ANY PD purchased (regardless of type), we just
+    // need to distinguish "has PD" from "no PD".
+    //
+    // Accepted forms (case-insensitive):
+    //   - "no", "none", "false", "0", "self-serve"  → self-serve block
+    //   - anything else non-empty (yes/virtual/in-person/2/true/etc.)  → pd block
+    //   - empty / missing  → null (fall through to manual dropdown)
+    function resolveBlockForSFDC(rawValue) {
+      const v = (rawValue || "").trim().toLowerCase();
+      if (!v) return null;
+      const noPdValues = ["no", "none", "false", "0", "self-serve", "selfserve"];
+      if (noPdValues.includes(v)) return "self-serve";
+      return "pd";
+    }
 
     function setBlockEnabled(block, enabled) {
       block.hidden = !enabled;
@@ -1427,7 +1272,7 @@
     // Check URL for a SFDC-driven PD value
     const urlParams = new URLSearchParams(window.location.search);
     const pdFromUrl = (urlParams.get("pd") || "").trim().toLowerCase();
-    const mappedBlock = SFDC_TO_BLOCK[pdFromUrl];
+    const mappedBlock = resolveBlockForSFDC(pdFromUrl);
 
     // Capture the raw value (even if unmapped) so we can debug from Formspree submissions
     if (pdFromUrl && sfdcSourceInput) {
