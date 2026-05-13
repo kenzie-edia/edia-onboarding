@@ -643,7 +643,7 @@
   <div class="hero-inner">
     <span class="pill">District Onboarding</span>
     <h1>Let's get your district set up for the year ahead.</h1>
-    <p class="lede">A few quick questions to align on outcomes, connect your systems, and plan your team's training. This should take about 5 minutes. Your progress saves automatically.</p>
+    <p class="lede">A few quick questions to align on outcomes, connect your systems, and plan your team's training. This should take about 8&ndash;12 minutes. Your progress saves automatically.</p>
 
     <div class="progress">
       <div class="progress-step completed">
@@ -698,6 +698,8 @@
     <!-- ===== SECTION 1: About you ===== -->
     <section class="section">
       <div class="section-label">Section 01</div>
+      <h2 class="section-heading">About you</h2>
+      <p class="section-sub">Just so we know who to circle back with as we work through onboarding.</p>
 
       <div class="field" style="margin-bottom:0;">
         <label>Your name and email <span style="color:#B42318">*</span></label>
@@ -833,22 +835,24 @@
       <!-- Block: Self-serve only -->
       <div class="pd-block" data-package="self-serve" hidden>
         <div class="tier-note" style="margin-bottom:22px;">
-          <strong>Your team will have access to our self-serve PD library.</strong> Courses are available on-demand — your team can complete them on their own schedule. We'll send login details right after kickoff.
+          <strong>Our full self-serve PD library is launching soon.</strong> Until then, your team has access to the resources below — and our support team is just an email away.
         </div>
-        <div class="row">
-          <div class="field">
-            <label for="users-ss">Estimated number of users who'll use the library</label>
-            <input type="number" name="estimated_users" placeholder="e.g. 45">
-            <p class="helper">Counselors, attendance staff, principals, district leadership.</p>
-          </div>
-          <div class="field">
-            <label for="interest-live">Interest in adding live sessions later?</label>
-            <select name="self_serve_interest">
-              <option value="">— Select —</option>
-              <option>Yes, please send pricing</option>
-              <option>Maybe — let's revisit in a few months</option>
-              <option>No, self-serve is enough for now</option>
-            </select>
+
+        <div class="field" style="margin-bottom:0;">
+          <span class="group-label">Available now</span>
+          <div style="background: var(--wg-100); border-radius: 8px; padding: 6px 22px; margin-top: 4px;">
+            <div style="display: flex; align-items: baseline; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--wg-200);">
+              <strong style="min-width: 140px; color: var(--wg-900); font-size: 13.5px;">Webinars</strong>
+              <a href="https://edia.app/webinars" style="color: var(--wg-900); text-decoration: underline; text-decoration-color: var(--y-400); text-decoration-thickness: 2px; text-underline-offset: 3px;" target="_blank" rel="noopener">edia.app/webinars</a>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--wg-200);">
+              <strong style="min-width: 140px; color: var(--wg-900); font-size: 13.5px;">Knowledge base</strong>
+              <a href="https://support.edia.app/en/" style="color: var(--wg-900); text-decoration: underline; text-decoration-color: var(--y-400); text-decoration-thickness: 2px; text-underline-offset: 3px;" target="_blank" rel="noopener">support.edia.app</a>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 14px; padding: 14px 0;">
+              <strong style="min-width: 140px; color: var(--wg-900); font-size: 13.5px;">Need help?</strong>
+              <a href="mailto:support@edia.app" style="color: var(--wg-900); text-decoration: underline; text-decoration-color: var(--y-400); text-decoration-thickness: 2px; text-underline-offset: 3px;">support@edia.app</a>
+            </div>
           </div>
         </div>
       </div>
@@ -861,7 +865,9 @@
 
         <div class="field">
           <label>PD coordinator <span style="color:#B42318">*</span></label>
-                     <input type="text" name="pd_coord_name" placeholder="Full name" required>
+          <p class="helper" style="margin-top:-4px; margin-bottom:10px;">Likely a different person from whoever's filling out this form — this is who we'll coordinate scheduling with.</p>
+          <div class="row">
+            <input type="text" name="pd_coord_name" placeholder="Full name" required>
             <input type="email" name="pd_coord_email" placeholder="email@district.org" required>
           </div>
           <p class="field-error">Please provide both a name and a valid email.</p>
