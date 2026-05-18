@@ -723,29 +723,24 @@
         <p class="helper" style="margin-top:-2px;margin-bottom:12px;">Select all that apply.</p>
         <div class="check-list">
           <label class="check-item selected">
-            <input type="checkbox" name="primary_outcomes" value="Chronic Absenteeism Reduction" checked>
+            <input type="checkbox" name="primary_outcomes" value="Improve State Test Scores / Raise Proficiency Rates" checked>
             <span class="check-box"></span>
-            <span class="check-text">Chronic Absenteeism Reduction</span>
+            <span class="check-text">Improve State Test Scores / Raise Proficiency Rates</span>
           </label>
           <label class="check-item selected">
-            <input type="checkbox" name="primary_outcomes" value="Improved Family Engagement and Two-Way Communication" checked>
+            <input type="checkbox" name="primary_outcomes" value="Better Data to Differentiate Instruction / Form Small Groups" checked>
             <span class="check-box"></span>
-            <span class="check-text">Improved Family Engagement and Two-Way Communication</span>
+            <span class="check-text">Better Data to Differentiate Instruction / Form Small Groups</span>
           </label>
           <label class="check-item">
-            <input type="checkbox" name="primary_outcomes" value="Proactive Identification of At-Risk Students">
+            <input type="checkbox" name="primary_outcomes" value="Math Intervention / MTSS Alignment">
             <span class="check-box"></span>
-            <span class="check-text">Proactive Identification of At-Risk Students</span>
+            <span class="check-text">Math Intervention / MTSS Alignment</span>
           </label>
           <label class="check-item">
-            <input type="checkbox" name="primary_outcomes" value="Understand the Why Behind Absences">
+            <input type="checkbox" name="primary_outcomes" value="AI Personalized Feedback (Replace teacher bandwidth gaps)">
             <span class="check-box"></span>
-            <span class="check-text">Understand the Why Behind Absences</span>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="primary_outcomes" value="Ease Administrative Burden / Save Staff Time">
-            <span class="check-box"></span>
-            <span class="check-text">Ease Administrative Burden / Save Staff Time</span>
+            <span class="check-text">AI Personalized Feedback (Replace teacher bandwidth gaps)</span>
           </label>
           <label class="check-item" id="other-checkbox">
             <input type="checkbox" name="primary_outcomes" value="Other" id="other-cb">
@@ -753,19 +748,6 @@
             <span class="check-text">Other</span>
           </label>
           <input type="text" name="primary_outcomes_other" id="other-text" placeholder="Tell us more&hellip;" style="display:none; width: calc(100% - 30px); margin: 8px 0 0 30px; padding: 10px 14px; font-size: 14px; border: 1px solid var(--wg-300); border-radius: 8px; background: var(--wg-0); font-family: inherit; color: var(--wg-900); box-sizing: border-box;">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label for="baseline">Current chronic absenteeism rate</label>
-          <input type="text" id="baseline" name="current_absenteeism_rate" placeholder="e.g. 24.6%" value="22.1%">
-          <p class="helper">From your most recent state reporting cycle.</p>
-        </div>
-        <div class="field">
-          <label for="target">Target by end of school year</label>
-          <input type="text" id="target" name="target_absenteeism_rate" placeholder="e.g. 18%">
-          <p class="helper">A specific percentage or range is fine.</p>
         </div>
       </div>
 
@@ -779,28 +761,29 @@
     <section class="section">
       <div class="section-label">Section 02</div>
       <h2 class="section-heading">Integrations</h2>
-      <p class="section-sub">We'll work with your IT team to set up integrations that connect the systems holding your student, attendance, and communication data. Please see our <a href="https://support.edia.app/en/collections/16521565-edia-for-attendance?q=integrations" target="_blank" rel="noopener" style="color: var(--wg-900); font-weight: 500; text-decoration: underline; text-decoration-color: var(--y-400); text-decoration-thickness: 2px; text-underline-offset: 3px;">Knowledge Base</a> for more information.</p>
+      <p class="section-sub">We'll work with your IT team to set up integrations that connect the systems holding your student rostering and learning management data. Please see our <a href="https://support.edia.app/en/collections/16521561-edia-for-math" target="_blank" rel="noopener" style="color: var(--wg-900); font-weight: 500; text-decoration: underline; text-decoration-color: var(--y-400); text-decoration-thickness: 2px; text-underline-offset: 3px;">Knowledge Base</a> for more information.</p>
 
       <div class="field">
-        <label for="sis">Student Information System (SIS) <span style="color:#B42318">*</span></label>
-        <select id="sis" name="sis" required>
-          <option>PowerSchool</option>
-          <option>Infinite Campus</option>
-          <option>Skyward</option>
-          <option>Aeries</option>
-          <option>Synergy / Edupoint</option>
-          <option value="other">Other / Not listed</option>
+        <label for="rostering">Rostering <span style="color:#B42318">*</span></label>
+        <select id="rostering" name="rostering" required>
+          <option>Clever</option>
+          <option>Classlink</option>
+          <option value="other">Other / Neither</option>
         </select>
-        <input type="text" id="sis-other" name="sis_other" placeholder="Which SIS does your district use?" style="display:none; margin-top: 8px; width: 100%; padding: 11px 14px; font-size: 14px; border: 1px solid var(--wg-300); border-radius: 8px; background: var(--wg-0); font-family: inherit; color: var(--wg-900); box-sizing: border-box;">
-        <p class="helper">Your SIS is the source of truth for enrollment and attendance.</p>
-        <p class="field-error">Please select your SIS.</p>
+        <input type="text" id="rostering-other" name="rostering_other" placeholder="Which rostering system does your district use?" style="display:none; margin-top: 8px; width: 100%; padding: 11px 14px; font-size: 14px; border: 1px solid var(--wg-300); border-radius: 8px; background: var(--wg-0); font-family: inherit; color: var(--wg-900); box-sizing: border-box;">
+        <p class="helper">How we'll sync your student rosters into Edia.</p>
+        <p class="field-error">Please select a rostering option.</p>
       </div>
 
       <div class="field">
-        <label for="ein">EIN (Employer Identification Number)</label>
-        <input type="text" id="ein" name="ein" placeholder="XX-XXXXXXX" pattern="^\d{2}-?\d{7}$">
-        <p class="helper">Your district's 9-digit federal tax ID. Needed to register your district as a verified sender with mobile carriers so we can deliver text messages to families. If you don't have it handy, feel free to skip — we'll follow up.</p>
-        <p class="field-error">Please enter a valid 9-digit EIN (format: XX-XXXXXXX), or leave it blank.</p>
+        <label for="lms">What is your LMS?</label>
+        <select id="lms" name="lms">
+          <option>Schoology</option>
+          <option>Canvas</option>
+          <option>Google Classroom</option>
+          <option value="other">Other / Neither</option>
+        </select>
+        <input type="text" id="lms-other" name="lms_other" placeholder="Which LMS does your district use?" style="display:none; margin-top: 8px; width: 100%; padding: 11px 14px; font-size: 14px; border: 1px solid var(--wg-300); border-radius: 8px; background: var(--wg-0); font-family: inherit; color: var(--wg-900); box-sizing: border-box;">
       </div>
 
       <div class="field" style="margin-bottom:0;">
@@ -882,6 +865,145 @@
         <div class="field">
           <label for="pd-staff-count">How many staff members will be participating in PD?</label>
           <input type="number" id="pd-staff-count" name="pd_staff_count" placeholder="e.g., 25" min="0">
+        </div>
+
+        <div class="field">
+          <span class="group-label">Which staff members?</span>
+          <p class="helper" style="margin-top:-4px; margin-bottom:10px;">Select all that apply.</p>
+          <div class="check-list">
+            <label class="check-item">
+              <input type="checkbox" name="pd_staff_roles" value="Gen Ed Teachers">
+              <span class="check-box"></span>
+              <span class="check-text">Gen Ed Teachers</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="pd_staff_roles" value="SPED Teachers">
+              <span class="check-box"></span>
+              <span class="check-text">SPED Teachers</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="pd_staff_roles" value="Admin">
+              <span class="check-box"></span>
+              <span class="check-text">Admin</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="pd_staff_roles" value="Coaches">
+              <span class="check-box"></span>
+              <span class="check-text">Coaches</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="pd_staff_roles" value="TSAs">
+              <span class="check-box"></span>
+              <span class="check-text">TSAs</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="pd_staff_roles" value="Support">
+              <span class="check-box"></span>
+              <span class="check-text">Support</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="pd-curriculum">What curriculum does your school or district currently use?</label>
+          <input type="text" id="pd-curriculum" name="pd_curriculum" placeholder="e.g., Eureka Math, Illustrative Mathematics, Bridges, enVision…">
+        </div>
+
+        <div class="field">
+          <span class="group-label">Which classes at your school are currently using Edia?</span>
+          <p class="helper" style="margin-top:-4px; margin-bottom:10px;">Select all that apply.</p>
+          <div class="check-list">
+            <label class="check-item">
+              <input type="checkbox" name="pd_classes_using_edia" value="Core Math Classes">
+              <span class="check-box"></span>
+              <span class="check-text">Core Math Classes</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="pd_classes_using_edia" value="Resource Classes">
+              <span class="check-box"></span>
+              <span class="check-text">Resource Classes</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="pd_classes_using_edia" value="Remediation Classes">
+              <span class="check-box"></span>
+              <span class="check-text">Remediation Classes</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="pd_classes_using_edia" value="Intervention Classes">
+              <span class="check-box"></span>
+              <span class="check-text">Intervention Classes</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="pd_classes_using_edia" value="Tutoring outside of the school day">
+              <span class="check-box"></span>
+              <span class="check-text">Tutoring outside of the school day</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="pd-math-block">Tell us about your math block structure</label>
+          <textarea id="pd-math-block" name="pd_math_block" placeholder="e.g., 60 min block — warm-up, mini-lesson, work time / small groups, closing. Small group instruction is part of the block 2x/week…"></textarea>
+          <p class="helper">Include length, lesson plan structure, and whether small group instruction is part of the block.</p>
+        </div>
+
+        <div class="field">
+          <span class="group-label">Teacher devices</span>
+          <p class="helper" style="margin-top:-4px; margin-bottom:10px;">Select all that apply.</p>
+          <div class="check-list">
+            <label class="check-item">
+              <input type="checkbox" name="teacher_devices" value="iPad">
+              <span class="check-box"></span>
+              <span class="check-text">iPad</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="teacher_devices" value="Tablet">
+              <span class="check-box"></span>
+              <span class="check-text">Tablet</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="teacher_devices" value="Chromebook">
+              <span class="check-box"></span>
+              <span class="check-text">Chromebook</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="teacher_devices" value="Laptop">
+              <span class="check-box"></span>
+              <span class="check-text">Laptop</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="group-label">Student devices</span>
+          <p class="helper" style="margin-top:-4px; margin-bottom:10px;">Select all that apply.</p>
+          <div class="check-list">
+            <label class="check-item">
+              <input type="checkbox" name="student_devices" value="iPad">
+              <span class="check-box"></span>
+              <span class="check-text">iPad</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="student_devices" value="Tablet">
+              <span class="check-box"></span>
+              <span class="check-text">Tablet</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="student_devices" value="Chromebook - Nontouchscreen">
+              <span class="check-box"></span>
+              <span class="check-text">Chromebook (Nontouchscreen)</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="student_devices" value="Chromebook - Touchscreen">
+              <span class="check-box"></span>
+              <span class="check-text">Chromebook (Touchscreen)</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="student_devices" value="Laptop">
+              <span class="check-box"></span>
+              <span class="check-text">Laptop</span>
+            </label>
+          </div>
         </div>
 
         <div class="field" style="margin-bottom:0;">
@@ -977,14 +1099,24 @@
   wireOtherToggle("other-cb", "other-text");
   wireOtherToggle("audience-other-cb", "audience-other-text");
 
-  const sisSelect = document.getElementById("sis");
-  const sisOther = document.getElementById("sis-other");
-  if (sisSelect && sisOther) {
-    const updateSis = () => {
-      sisOther.style.display = sisSelect.value === "other" ? "block" : "none";
+  const rosteringSelect = document.getElementById("rostering");
+  const rosteringOther = document.getElementById("rostering-other");
+  if (rosteringSelect && rosteringOther) {
+    const updateRostering = () => {
+      rosteringOther.style.display = rosteringSelect.value === "other" ? "block" : "none";
     };
-    sisSelect.addEventListener("change", updateSis);
-    updateSis();
+    rosteringSelect.addEventListener("change", updateRostering);
+    updateRostering();
+  }
+
+  const lmsSelect = document.getElementById("lms");
+  const lmsOther = document.getElementById("lms-other");
+  if (lmsSelect && lmsOther) {
+    const updateLms = () => {
+      lmsOther.style.display = lmsSelect.value === "other" ? "block" : "none";
+    };
+    lmsSelect.addEventListener("change", updateLms);
+    updateLms();
   }
 
   // ----- Autosave to localStorage -----
