@@ -95,7 +95,7 @@
     padding: 56px 48px 48px;
     border-bottom: 1px solid var(--wg-300);
   }
-  .hero-inner { max-width: 880px; margin: 0 auto; }
+  .hero-inner { max-width: 880px; margin: 0 auto; text-align: center; }
 
   .pill {
     display: inline-block;
@@ -116,7 +116,7 @@
     line-height: 1.18;
     letter-spacing: -0.02em;
     color: var(--wg-900);
-    margin-bottom: 14px;
+    margin: 0 auto 14px;
     max-width: 640px;
   }
 
@@ -125,6 +125,7 @@
     color: var(--wg-600);
     line-height: 1.6;
     max-width: 620px;
+    margin: 0 auto;
   }
 
   .progress {
@@ -525,9 +526,10 @@
     color: var(--wg-0);
     padding: 24px 48px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     font-size: 12.5px;
+    text-align: center;
   }
   .page-footer .cta { color: var(--y-400); font-weight: 500; }
   .page-footer .contact { color: var(--wg-300); }
@@ -756,7 +758,7 @@
   <div class="hero-inner">
     <span class="pill">District Onboarding</span>
     <h1>Welcome to Edia — we're so glad you're here!</h1>
-    <p class="lede">Just a few quick questions to align on your goals, connect your systems, and plan your team's training. It should take about 5 minutes, and your progress saves as you go.</p>
+    <p class="lede">Here are a few quick questions to align on your goals, connect your systems, and plan your team's training. It should take about 5 minutes, and your progress saves as you go.</p>
 
     <div class="progress">
       <div class="progress-step completed">
@@ -922,7 +924,7 @@
           <input type="text" id="it-contact" name="it_contact_name" placeholder="Full name" required>
           <input type="email" name="it_contact_email" placeholder="email@district.org" required>
         </div>
-        <p class="helper">We'll need to work with your SIS administrator to get the integration fully set up via our Integration Wizard. We'll keep you copied on all communications throughout the process.</p>
+        <p class="helper">We'll need to work with your SIS administrator to get the integration fully set up via our <a href="https://support.edia.app/en/articles/15292278-getting-started-with-edia-s-it-setup-wizard" target="_blank" rel="noopener" style="color: var(--wg-900); font-weight: 500; text-decoration: underline; text-decoration-color: var(--y-400); text-decoration-thickness: 2px; text-underline-offset: 3px;">Integration Wizard</a>. We'll keep you copied on all communications throughout the process.</p>
         <p class="field-error">Please provide both a name and a valid email.</p>
       </div>
     </section>
@@ -995,15 +997,19 @@
       <!-- Block: Unified PD (shown when any live PD purchased) -->
       <div class="pd-block" data-package="pd" hidden>
         <div class="tier-note" style="margin-bottom:22px;">
-          The below details help our Professional Learning Managers tailor PD sessions to your district. If you have questions, just reply to your onboarding email.
+          The below details help our Professional Learning Managers (PLMs) tailor PD sessions to your district. If you have questions, just reply to your onboarding email.
         </div>
 
         <div class="field">
           <label>PD coordinator <span style="color:#B42318">*</span></label>
-          <p class="helper" style="margin-top:-4px; margin-bottom:10px;">Likely a different person from whoever's filling out this form — this is who we'll coordinate scheduling with.</p>
+          <label class="check-item" style="padding: 6px 4px; margin: 4px 0 8px;">
+            <input type="checkbox" id="pd-coord-is-me" name="pd_coord_is_me" value="yes">
+            <span class="check-box"></span>
+            <span class="check-text">This is me — use my contact info from above</span>
+          </label>
           <div class="row">
-            <input type="text" name="pd_coord_name" placeholder="Full name" required>
-            <input type="email" name="pd_coord_email" placeholder="email@district.org" required>
+            <input type="text" id="pd-coord-name" name="pd_coord_name" placeholder="Full name" required>
+            <input type="email" id="pd-coord-email" name="pd_coord_email" placeholder="email@district.org" required>
           </div>
           <p class="field-error">Please provide both a name and a valid email.</p>
         </div>
@@ -1011,11 +1017,13 @@
         <div class="field">
           <label for="pd-preferred-times">Do you have preferred dates or times for PD sessions?</label>
           <textarea id="pd-preferred-times" name="pd_preferred_times" placeholder="e.g., afternoons after 3pm, weeks of Aug 12 and 19, no Fridays…"></textarea>
+          <p class="helper">We can't guarantee exact dates and times will be available, but we'll work with our PLMs to get you scheduled.</p>
         </div>
 
         <div class="field">
           <label for="pd-staff-count">How many staff members will be participating in PD?</label>
           <input type="number" id="pd-staff-count" name="pd_staff_count" placeholder="e.g., 25" min="0">
+          <p class="helper">An approximate number is fine — we can firm it up later.</p>
         </div>
 
         <div class="field" style="margin-bottom:0;">
@@ -1042,7 +1050,7 @@
 <div id="success-state" style="display:none;">
   <div class="success-card">
     <div class="check-circle"></div>
-    <h2>Thanks — we've got it.</h2>
+    <h2>Thanks, we've got it!</h2>
     <p>Your onboarding details are in. Your Edia Customer Success Manager will reach out shortly to confirm next steps.</p>
 
     <div class="success-resources">
@@ -1087,8 +1095,7 @@
 <!-- ===== Page footer ===== -->
 <div class="page-footer-accent"></div>
 <footer class="page-footer">
-  <span class="cta">Questions? Your success lead is one email away.</span>
-  <span class="contact">success@edia.com &nbsp;&middot;&nbsp; edia.com</span>
+  <span class="cta">Questions? Reply to the email from your CSM and we'll make sure you have what you need!</span>
 </footer>
 
 <!-- ===== Toast ===== -->
@@ -1343,7 +1350,7 @@
         const data = await response.json().catch(() => ({}));
         const message =
           (data.errors && data.errors.map((er) => er.message).join(", ")) ||
-          "Something went wrong. Please try again, or email success@edia.com.";
+          "Something went wrong. Please try again, or email support@edia.app.";
         showToast(message, 6000);
         submitBtn.disabled = false;
         saveLaterBtn.disabled = false;
@@ -1450,6 +1457,27 @@
     }
 
     banner.style.display = "block";
+  })();
+
+  // ----- "This is me" shortcut: copies submitter contact into PD coordinator -----
+  (function setupPdCoordIsMe() {
+    const isMeCb = document.getElementById("pd-coord-is-me");
+    if (!isMeCb) return;
+    isMeCb.addEventListener("change", () => {
+      if (!isMeCb.checked) return;
+      const submitterName = document.getElementById("submitter-name");
+      const submitterEmail = document.getElementById("submitter-email");
+      const pdName = document.getElementById("pd-coord-name");
+      const pdEmail = document.getElementById("pd-coord-email");
+      if (submitterName && pdName) {
+        pdName.value = submitterName.value;
+        pdName.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+      if (submitterEmail && pdEmail) {
+        pdEmail.value = submitterEmail.value;
+        pdEmail.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+    });
   })();
 
   // ----- Init -----
